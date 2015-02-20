@@ -1,11 +1,15 @@
 <?php
 	include 'php/laender.php';
+	include 'php/subjects.php';
 	include 'php/years.php';
 ?>
 
-<link href="css/bootstrap-toggle.min.css" rel="stylesheet">
-<script src="js/bootstrap-toggle.min.js"></script>
+
 <script src="js/content.js"></script>
+
+<!-- SWITCH -->
+<script src="js/bootstrap-switch.js"></script>
+<link href="css/bootstrap-switch.css" rel="stylesheet">
 
 <!-- SCRIPT -->
 
@@ -106,17 +110,47 @@
 			<div  class="panel-body ">
 				<div class="row">
 					<div class="container" >
-						<ul class="breadcrumb"  id="where">
+						
+						
+						<div class="row">
+							<div class="container"  >
+								<ul class="breadcrumb"  id="where">
 								  <li><a href="#">Lernen</a> </li>
-						</ul>
-					</Div>			
+								</ul>
+							</Div>
+						</div>
+						
+						<p>Leistungskurs: </p>
+						<div style="height:30px;">
+							<input type="checkbox" class="switch"  id="lkcheckbox" checked />
+							<script>
+								$.fn.bootstrapSwitch.defaults.offText = 'LK';
+								$.fn.bootstrapSwitch.defaults.onCOlor = 'danger';
+								
+								$.fn.bootstrapSwitch.defaults.onText = 'GK';
+								$("#lkcheckbox").bootstrapSwitch();
+								
+								//LISTEN FOR SWITCH EVENT
+								$("#lkcheckbox").on('switchChange.bootstrapSwitch', function(event, state) {
+									
+									if (lktogg == "0"){
+										lktogg = "1";
+									} else {
+										lktogg = "0";
+									}
+								  dosearch(this);
+								});
+								
+							</script>
+						</div>
+					</div>			
 				</div>
 				<hr>
 				<div class="row">
 					<div class="container">
 						<small id="resultscounter">0 Ergebnisse</small>
-								<a href="?page=content" style="margin-right:5px" class="btn btn-default pull-right">Reset</a>
-					</Div>
+						<a href="?page=content" style="margin-right:5px" class="btn btn-default pull-right">Reset</a>
+					</div>
 				</div>
 				
 			
@@ -238,13 +272,8 @@
 									  <div class="  col-sm-6 col-md-3">
 									  
 											<?php
-											$abfrage2 = "SELECT * FROM subjects WHERE id = " . $sub;
-											$ergebnis2 = mysql_query($abfrage2);
-											$data = array();
-											
-											$thissubject = mysql_fetch_object($ergebnis2);
-											$thisimg = $thissubject->img;
-											
+												$thissubject = $subjects[intval($contents[i]->subject) + 1];
+												$thisimg = $thissubject->img;
 											?>
 									  
 									  
@@ -311,6 +340,66 @@
 							
 							}
 							
+			} else { #DO THE TIMELINE STUFF
+			?>
+			<div class="row">
+				
+				<ul class="timeline">
+				 
+				 <?php
+				 $toggle = 0;
+				 for ($i = 0; $i < count($contents); $i++){
+				 ?>
+					
+					<li class="<?php if($toggle==1){echo 'timeline-inverted';}?>">
+							
+					
+					<?php
+						$thissubject = $subjects[intval($contents[i]->subject) + 1];
+						$thisimg = $thissubject->img;
+					?>
+
+
+
+					<div class="timeline-badge" style="background-image:url(<?php echo $thisimg;?>);background-size:cover;background-size:100%;back:50% 50%;background-repeat:no-repeat;"></div>
+					  <div class="timeline-panel">
+						<div class="timeline-heading">
+						  <h4 class="timeline-title"><?php echo $contents[$i]->title;?></h4>
+						  <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> <?php 
+						  
+						$date = new DateTime();
+						$date->format('Y-m-d H:i:s');
+						$date->setTimestamp($contents[$i]->time / 1000);
+						echo $date->format('d.m.Y');
+						  
+						  
+						  ?></small></p>
+						</div>
+						<div class="timeline-body">
+						  <p><?php echo $contents[$i]->thumbtext;?></p>
+						</div>
+						
+						
+						<hr>
+						<a href="?page=view&url=<?php echo $contents[$i]->content; ?>" style="margin-top:5px;color:white;background-color:<?php echo $thissubject->color; ?>" class="btn btn-default" role="button">Beitrag anzeigen</a>
+					  </div>
+					</li>
+					
+				<?php
+					
+					if ($toggle==0){
+						$toggle=1;
+					}else{
+						$toggle=0;
+					}
+				
+				}
+				?> 
+				   
+				</ul>
+				</div>
+			
+			<?php
 			}
 	
 

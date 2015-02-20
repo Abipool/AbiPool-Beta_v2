@@ -11,7 +11,7 @@
 	//DO GET RESULT
 	
 	$landid = $_POST['land'];
-	
+	$lk = $_POST['lk'];
 	
 	$year = $_POST['year'];
 	$year = $year + 1;
@@ -19,7 +19,7 @@
 	$subject = $_POST['subject'];
 	
 	
-	$abfrage = "SELECT * FROM library WHERE land = " .  $landid . " AND year = " . $year . " AND subject = " . $subject  ;
+	$abfrage = "SELECT * FROM library WHERE land = " .  $landid . " AND year = " . $year . " AND subject = " . $subject . " AND lk = " . $lk ;
 	$ergebnis = mysql_query($abfrage);
 	$data = array();
 	

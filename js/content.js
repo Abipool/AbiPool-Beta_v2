@@ -1,6 +1,8 @@
 var mland = "Hessen";
 var mlandid = 6;
 
+var lktogg = "0"
+
 var mjahr = "Abi 2015";
 var mjahrid = 0;
 
@@ -22,7 +24,7 @@ function showsearch(){
 
 function jahr(e){
 	$("#subjects-dd").show(400);
-	$("#jahr-dd").css('background-color', '#9D2933');
+	$("#jahr-dd").css('background-color', '#fff');
 	mjahr = $(e).html();
 	mjahrid = $(e).attr('value');
 	updatewhere();
@@ -30,7 +32,7 @@ function jahr(e){
 
 function subject(e){
 	$("#ktoggle").show(400);
-	$("#subjects-dd").css('background-color', '#9D2933');
+	$("#subjects-dd").css('background-color', '#fff');
 	msubject = $(e).html();
 	msubjectid = $(e).attr('value');
 	updatewhere();
@@ -41,7 +43,7 @@ function land(e){
 	mland = $(e).html();
 	mlandid = $(e).attr('value');
 	$("#jahr-dd").show(400);
-	$("#laender-dd").css('background-color', '#9D2933');
+	$("#laender-dd").css('background-color', '#fff');
 	updatewhere();
 }
 
@@ -69,13 +71,8 @@ function dosearch (e){
 		url: 'php/loader.php',
 		dataType: "text",
 		type: "POST",
-		data: {mode: "load", land: mlandid, subject: msubjectid, year: mjahrid}
+		data: {mode: "load", land: mlandid, subject: msubjectid, year: mjahrid, lk: lktogg}
 	}).done(function(msg) {
-		
-		
-		
-		
-		
 		
 		var obj = jQuery.parseJSON(msg);
 		
@@ -88,10 +85,10 @@ function dosearch (e){
 				}
 				if(obj[i].type == 2){
 					
-					$("#results").append("<a  class='list-group-item' href='?page=content&land=" + mlandid +"&subject=" + msubjectid +"&year="+ mjahrid +"&theme=" + (parseInt(i)+1)  + "&mode=cards'>" + obj[i].text +"<span style='background-color:#666666' class='badge'>" + obj[i].posts +"</span>  </a>");
+					$("#results").append("<a  class='list-group-item' href='?page=content&land=" + mlandid +"&subject=" + msubjectid +"&year="+ mjahrid +"&theme=" + obj[i].id  + "&mode=cards'>" + obj[i].text +"<span style='background-color:#666666' class='badge'>" + obj[i].posts +"</span>  </a>");
 				}
 			}
-			$("#header").slideUp(1000);
+			//$("#header").slideUp(1000);
 			$("#notsearch").hide(400);
 			$(".search").show(400);
 

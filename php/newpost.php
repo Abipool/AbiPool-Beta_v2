@@ -29,6 +29,14 @@
 		$eintragen = mysql_query($eintrag) or ($status="insert error");
 		echo $eintragen;
 		
+		$aendern = "
+			UPDATE library 
+			SET posts = posts + 1
+			WHERE id = '".$theme."'
+		";
+		
+		$update = mysql_query($aendern);
+		
 	} else {
 	$status = "error";
 	}

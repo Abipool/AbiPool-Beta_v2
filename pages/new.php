@@ -46,7 +46,7 @@
    	
    	
    	
-   	<div class="panel  panel-success">
+   	<div class="panel  panel-danger">
     
     
     
@@ -60,33 +60,29 @@
     	
     	<div class="row" style="margin-top:1%" >
      	<div class="col-md-3" style="margin-bottom:20px;">
-     	
-     	 
-      <a href="#" class="thumbnail">
-        <div id="thumbimg" style="width:100%;height:200px;background-image:url('img/placeholder.png'); background-size: cover;background-repeat: no-repeat; background-position: 50% 50%"></div>
-    	  
-        
-      </a>
-      
-      	<!-- TEST -->
-        
-       
-       
-       
-       	
-       <button id="upload-btn" type="button" class="btn btn-danger" >Foto auswählen</button>
-       	
-       <div id="errormsg" class="clearfix redtext">
-       </div>	              
-       <div id="pic-progress-wrap" class="progress-wrap" style="margin-top:10px;margin-bottom:10px;">
-       </div>	
-       
-       <div id="picbox" class="clear" style="padding-top:0px;padding-bottom:10px;">
-       </div>
+			
+			 
+			<a href="#" class="thumbnail">
+				<div id="thumbimg" style="width:100%;height:200px;background-image:url('img/placeholder.png'); background-size: cover;background-repeat: no-repeat; background-position: 50% 50%"></div>
+			
+			</a>
+		  
+			
+			
+		   <button id="upload-btn" type="button" class="btn btn-default" >Foto auswählen</button>
+			
+		   <div id="errormsg" class="clearfix redtext">
+		   </div>
+		   
+		   <div id="pic-progress-wrap" class="progress-wrap" style="margin-top:10px;margin-bottom:10px;">
+		   </div>	
+		   
+		   <div id="picbox" class="clear" style="padding-top:0px;padding-bottom:10px;">
+		   </div>
 
-       <div class="clear-line" style="margin-top:10px;"></div>
-       
-     	
+		   <div class="clear-line" style="margin-top:10px;"></div>
+		   
+			
      	</div>
      	
       
@@ -148,7 +144,7 @@
    	
    	<div class="row" style="margin-top:20px;">
     <div class="col-md-6" >
-    	<div class="panel panel-success">
+    	<div class="panel panel-danger">
      <div class="panel-heading" >Code Editor</div>
     
     	<div class="panel-body" style="margin-left:-15px;margin-top:-15px;margin-bottom:-15px;margin-right:-15px" >
@@ -185,7 +181,7 @@ Und zwar in HTML
    	
    	
    	<div class="col-md-6">
-    <div class="panel panel-success">
+    <div class="panel panel-danger">
     	<div class="panel-heading" >Vorschau</div>
     	
     	<div class="panel-body">
@@ -259,11 +255,10 @@ Und zwar in HTML
 
 <?php
 	if (isset($_GET['subject'])){
- echo '<script> subid = ' . $_GET["subject"] . ';$("#dropdownMenu1").hide(0);</script>';
+		echo '<script> subid = ' . $_GET["subject"] . ';$("#dropdownMenu1").hide(0);</script>';
 	}
 	if (isset($_GET['theme'])){
- echo '<script> themeid = ' . $_GET["theme"] . ';$("#dropdownMenu1").hide(0);</script>';
+		echo '<script> themeid = ' . $_GET["theme"] . ';$("#dropdownMenu1").hide(0);</script>';
 	}
-	
 ?>	
 

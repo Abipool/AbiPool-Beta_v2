@@ -143,6 +143,7 @@ function post(){
 	
 		$.ajax({ 
 			url: 'php/counter.php' 
+			
 		}).done(function(msg) {
 			
 			cid = parseInt(msg);
